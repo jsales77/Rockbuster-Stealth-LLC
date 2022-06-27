@@ -1,0 +1,10 @@
+SELECT A.rating AS rating, 
+              COUNT(A.film_id) AS number_of_films, SUM(E.amount) AS total_revenue
+FROM film A
+INNER JOIN film_category B ON A.film_id = B.film_id
+INNER JOIN category C ON B.category_id = C.category_id
+INNER JOIN inventory F ON A.film_id = F.film_id
+INNER JOIN rental D ON F.inventory_id = D.inventory_id
+INNER JOIN payment E ON D.rental_id = E.rental_id
+GROUP BY A. rating
+ORDER BY total_revenue DESC
